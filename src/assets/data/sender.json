@@ -1,0 +1,42 @@
+[
+  {
+      "label": "Sender Name",
+      "model": "sender_name",
+      "value": "",
+      "type": "text",
+      "display": true,
+      "table_display": true,
+      "multiple": false,
+      "items": []
+  },
+  {
+      "label": "Sender Phone",
+      "model": "sender_phone",
+      "value": "",
+      "type": "text",
+      "display": true,
+      "table_display": true,
+      "multiple": false,
+      "items": []
+  },
+  {
+      "label": "Sender Address",
+      "model": "sender_address",
+      "value": "",
+      "type": "text",
+      "display": true,
+      "table_display": true,
+      "multiple": false,
+      "items": []
+  },
+  {
+      "label": "Sender Id",
+      "model": "sender_id",
+      "value": "",
+      "type": "text",
+      "display": true,
+      "table_display": true,
+      "multiple": false,
+      "items": []
+  }
+]

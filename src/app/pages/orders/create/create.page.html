@@ -1,0 +1,132 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+    <ion-back-button defaultHref="/orders"></ion-back-button>
+  </ion-buttons>
+    <ion-title>Create Order</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-segment [(ngModel)]="step"  [scrollable]="true">
+    <ion-segment-button value="1">
+      <ion-icon name="send"></ion-icon>
+      <ion-label>Sender Details</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="2">
+      <ion-icon name="people"></ion-icon>
+      <ion-label>Receiver Details</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="3">
+      <ion-icon name="cart"></ion-icon>
+      <ion-label>Order Details</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+
+
+  <!-- Step Content -->
+  <div [ngSwitch]="step">
+    <div *ngSwitchCase="'1'">
+      <form [formGroup]="form">
+        <ion-item-group>
+          <div *ngFor="let field of senderData">
+            <ion-item-divider *ngIf="field.display">
+              <ng-container>
+                <ion-input [label]="field.label" labelPlacement="stacked" [clearInput]="true" placeholder=""
+                  fill="outline" labelPlacement="floating" *ngIf="field.type === 'text' || field.type === 'date'"
+                  formControlName="{{field.model}}" type="{{field.type}}">
+                </ion-input>
+                <ion-textarea [label]="field.label" labelPlacement="floating" fill="outline" placeholder="Enter text"
+                  *ngIf="field.type === 'long_text'" formControlName="{{field.model}}"></ion-textarea>
+
+                <ion-select aria-label="orders" [placeholder]="field.label" *ngIf="field.type === 'select'"
+                  formControlName="{{field.model}}">
+                  <ion-select-option *ngFor="let item of field.items" [value]="item">{{item}}</ion-select-option>
+                </ion-select>
+
+                <ion-list *ngIf="field.type === 'radio'">
+                  <ion-label>{{ field.label }}</ion-label>
+                  <ion-radio-group>
+                    <ion-item *ngFor="let item of field.items;">
+                      <ion-radio [value]="item">{{ item }}</ion-radio>
+                    </ion-item>
+                  </ion-radio-group>
+                </ion-list>
+              </ng-container>
+            </ion-item-divider>
+          </div>
+        </ion-item-group>
+      </form>
+
+    </div>
+    <div *ngSwitchCase="'2'">
+      <form [formGroup]="form1">
+        <ion-item-group>
+          <div *ngFor="let field of receiverData">
+            <ion-item-divider *ngIf="field.display">
+              <ng-container>
+                <ion-input [label]="field.label" labelPlacement="stacked" [clearInput]="true" placeholder=""
+                  fill="outline" labelPlacement="floating" *ngIf="field.type === 'text' || field.type === 'date'"
+                  formControlName="{{field.model}}" type="{{field.type}}">
+                </ion-input>
+                <ion-textarea [label]="field.label" labelPlacement="floating" fill="outline" placeholder="Enter text"
+                  *ngIf="field.type === 'long_text'" formControlName="{{field.model}}"></ion-textarea>
+
+                <ion-select aria-label="orders" [placeholder]="field.label" *ngIf="field.type === 'select'"
+                  formControlName="{{field.model}}">
+                  <ion-select-option *ngFor="let item of field.items" [value]="item">{{item}}</ion-select-option>
+                </ion-select>
+
+                <ion-list *ngIf="field.type === 'radio'">
+                  <ion-label>{{ field.label }}</ion-label>
+                  <ion-radio-group>
+                    <ion-item *ngFor="let item of field.items;">
+                      <ion-radio [value]="item">{{ item }}</ion-radio>
+                    </ion-item>
+                  </ion-radio-group>
+                </ion-list>
+              </ng-container>
+            </ion-item-divider>
+          </div>
+        </ion-item-group>
+      </form>
+
+    </div>
+    <div *ngSwitchCase="'3'">
+      <form [formGroup]="form2">
+        <ion-item-group>
+          <div *ngFor="let field of orderData">
+            <ion-item-divider *ngIf="field.display">
+              <ng-container>
+                <ion-input [label]="field.label" labelPlacement="stacked" [clearInput]="true" placeholder=""
+                  fill="outline" labelPlacement="floating" *ngIf="field.type === 'text' || field.type === 'date'"
+                  formControlName="{{field.model}}" type="{{field.type}}">
+                </ion-input>
+                <ion-textarea [label]="field.label" labelPlacement="floating" fill="outline" placeholder="Enter text"
+                  *ngIf="field.type === 'long_text'" formControlName="{{field.model}}"></ion-textarea>
+
+                <ion-select aria-label="orders" [placeholder]="field.label" *ngIf="field.type === 'select'"
+                  formControlName="{{field.model}}">
+                  <ion-select-option *ngFor="let item of field.items" [value]="item">{{item}}</ion-select-option>
+                </ion-select>
+
+                <ion-list *ngIf="field.type === 'radio'">
+                  <ion-label>{{ field.label }}</ion-label>
+                  <ion-radio-group>
+                    <ion-item *ngFor="let item of field.items;">
+                      <ion-radio [value]="item">{{ item }}</ion-radio>
+                    </ion-item>
+                  </ion-radio-group>
+                </ion-list>
+              </ng-container>
+            </ion-item-divider>
+          </div>
+        </ion-item-group>
+      </form>
+    </div>
+  </div>
+  <ion-button fill="outline">Submit</ion-button>
+
+
+
+</ion-content>

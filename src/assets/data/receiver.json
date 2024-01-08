@@ -1,0 +1,60 @@
+[
+  {
+      "label": "Receiver Name",
+      "model": "receiver_name",
+      "value": "",
+      "type": "text",
+      "display": true,
+      "table_display": true,
+      "multiple": false,
+      "items": []
+  },
+  {
+      "label": "Receiver Phone",
+      "model": "receiver_phone",
+      "value": "",
+      "type": "text",
+      "display": true,
+      "table_display": true,
+      "multiple": false,
+      "items": []
+  },
+  {
+      "label": "Receiver Address",
+      "model": "receiver_address",
+      "value": "",
+      "type": "text",
+      "display": true,
+      "table_display": true,
+      "multiple": false,
+      "items": []
+  },
+  {
+      "label": "Receiver Id",
+      "model": "receiver_id",
+      "value": "",
+      "type": "text",
+      "display": true,
+      "table_display": true,
+      "multiple": false,
+      "items": []
+  },
+  {
+      "label": "Latitude",
+      "model": "lat",
+      "value": "",
+      "type": "text",
+      "display": true,
+      "table_display": true,
+      "items": []
+  },
+  {
+      "label": "Longitude",
+      "model": "lng",
+      "value": "",
+      "type": "text",
+      "display": true,
+      "table_display": true,
+      "items": []
+  }
+]

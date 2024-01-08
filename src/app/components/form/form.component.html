@@ -1,0 +1,34 @@
+<!-- <ion-item-group>
+  <div *ngFor="let field of fields">
+    <ion-item-divider *ngIf="field.display">
+      <ng-container *ngIf="field.type === 'text' || field.type === 'date'">
+        <ion-input [label]="field.label" labelPlacement="stacked" [clearInput]="true"
+                   fill="outline" labelPlacement="floating"
+                   [formControlName]="field.model" [type]="field.type">
+        </ion-input>
+      </ng-container>
+
+      <ng-container *ngIf="field.type === 'long_text'">
+        <ion-textarea [label]="field.label" labelPlacement="floating"
+                      fill="outline" [formControlName]="field.model"></ion-textarea>
+      </ng-container>
+
+      <ng-container *ngIf="field.type === 'select'">
+        <ion-select [placeholder]="field.label" [formControlName]="field.model">
+          <ion-select-option *ngFor="let item of field.items" [value]="item">{{item}}</ion-select-option>
+        </ion-select>
+      </ng-container>
+
+      <ng-container *ngIf="field.type === 'radio'">
+        <ion-list>
+          <ion-label>{{ field.label }}</ion-label>
+          <ion-radio-group [formControlName]="field.model">
+            <ion-item *ngFor="let item of field.items;">
+              <ion-radio [value]="item">{{ item }}</ion-radio>
+            </ion-item>
+          </ion-radio-group>
+        </ion-list>
+      </ng-container>
+    </ion-item-divider>
+  </div>
+</ion-item-group> -->
