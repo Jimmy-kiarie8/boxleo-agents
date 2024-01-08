@@ -1,0 +1,7 @@
+{
+  "name": "boxleo-agent",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
