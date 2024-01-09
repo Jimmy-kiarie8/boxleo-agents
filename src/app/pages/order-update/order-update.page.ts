@@ -161,7 +161,7 @@ export class OrderUpdatePage implements AfterViewInit {
         loading.dismiss();
       }, 1000);
 
-      this.orderService.updateOrder(this.postData, this.id).subscribe((res: any) => {
+      this.orderService.patchItem(this.postData, 'order-status', this.id).subscribe((res: any) => {
         loading.dismiss();
         this.router.navigate(['/orders']);
       });

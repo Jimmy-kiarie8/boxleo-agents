@@ -9,18 +9,26 @@ import { Observable } from 'rxjs';
 export class OrderService {
 
   centralUrl = environment.centralUrl + '/api/mobile';
-  httpType = environment.httpType;
-  domain = localStorage.getItem('domain');
+  domain = environment.httpType;
   httpOptions = {
     headers: new HttpHeaders({
-      Accept:  'application/json',
+      Accept: 'application/json',
       // Authorization: environment.token
       Authorization: 'Bearer ' + localStorage.getItem('token')
     })
   };
   constructor(private http: HttpClient) { }
 
-  updateOrder(data: any, id: any): Observable<any> {
-    return this.http.get<any>(`${this.httpType}${this.domain}.${this.centralUrl}/orders`, this.httpOptions);
+  getItem(): Observable<any> {
+    return this.http.get<any>(`${this.domain}/orders`, this.httpOptions);
   }
+
+  postItem(data: any, model: String): Observable<any> {
+    return this.http.post(`${this.domain}/${model}`, data, this.httpOptions);
+  }
+
+  patchItem(data: any,model: String, id: any): Observable<any> {
+    return this.http.patch(`{this.domain}/${model}/${id}`, data, this.httpOptions);
+  }
+
 }
