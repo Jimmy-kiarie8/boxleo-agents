@@ -70,11 +70,11 @@
       </ion-fab-button>
     </ion-fab> -->
 
-        <ion-fab slot="fixed" vertical="bottom" horizontal="end" (click)="checkPermission()">
+        <!-- <ion-fab slot="fixed" vertical="bottom" horizontal="end" (click)="checkPermission()">
           <ion-fab-button>
             <ion-icon name="camera"></ion-icon>
           </ion-fab-button>
-        </ion-fab>
+        </ion-fab> -->
 
         <!-- <ion-fab vertical="center" horizontal="end" slot="fixed" (click)="deliveryPosition('Delivered')">
       <ion-fab-button color="success">
@@ -145,7 +145,7 @@
 
                     <ion-list *ngIf="field.type === 'radio'">
                       <ion-label>{{ field.label }}</ion-label>
-                      <ion-radio-group>
+                      <ion-radio-group formControlName="{{field.model}}">
                         <ion-item *ngFor="let item of field.items;">
                           <ion-radio [value]="item">{{ item }}</ion-radio>
                         </ion-item>
@@ -160,7 +160,7 @@
       </form>
     </div>
   </div>
-  <ion-button fill="outline">Submit</ion-button>
+  <ion-button fill="outline" (click)="submit()">Submit</ion-button>
 
 
 

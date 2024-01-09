@@ -3,10 +3,11 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Camera, CameraResultType, CameraSource, Photo } from '@capacitor/camera';
 import { AlertController, LoadingController, Platform } from '@ionic/angular';
-import { ActivatedRoute } from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
+import { ActivatedRoute, Router } from '@angular/router';
 // import SignaturePad from 'signature_pad';
 import { Filesystem, Directory } from '@capacitor/filesystem';
+import { OrderService } from 'src/app/services/order.service';
 
 @Component({
   selector: 'app-create',
@@ -30,13 +31,15 @@ export class CreatePage implements OnInit {
   constructor(
     private fb: FormBuilder,
     private http: HttpClient,
-
+    private router: Router,
     private loadingCtrl: LoadingController,
     private route: ActivatedRoute,
     private sanitizer: DomSanitizer,
     private platform: Platform,
-    private alertCtrl: AlertController
-    ) {
+    private alertCtrl: AlertController,
+    private orderService: OrderService,
+
+  ) {
     this.form = this.fb.group({});
   }
 
@@ -79,9 +82,9 @@ export class CreatePage implements OnInit {
 
     if (formNo == 1) {
       this.form = this.fb.group(group);
-    } else if(formNo == 2) {
+    } else if (formNo == 2) {
       this.form1 = this.fb.group(group);
-    } else if(formNo == 3) {
+    } else if (formNo == 3) {
       this.form2 = this.fb.group(group);
     }
   }
@@ -96,7 +99,7 @@ export class CreatePage implements OnInit {
     console.log('🚀 ~ file: order-update.page.ts:271 ~ OrderUpdatePage ~ checkPermission ~ permission:', permission);
     if (permission.camera === 'prompt') {
       this.requestCameraPermission();
-    } else if(permission.camera === 'granted') {
+    } else if (permission.camera === 'granted') {
       this.addNewToGallery();
     }
     // else if(permission.location === 'denied') {
@@ -183,5 +186,53 @@ export class CreatePage implements OnInit {
     });
 
     await alert.present();
+  }
+
+  calculateShippingCharges(weight: number, doorDelivery: boolean): number {
+    const baseShippingCharge = 20;
+    const extraWeightCharge = 10;
+    const doorDeliveryCharge = 150;
+    let totalCharge = baseShippingCharge;
+
+    // Calculate extra charge for weight above 5kg
+    if (weight > 5) {
+      totalCharge += (weight - 5) * extraWeightCharge;
+    }
+
+    // Add door delivery charge if applicable
+    if (doorDelivery) {
+      totalCharge += doorDeliveryCharge;
+    }
+
+    return totalCharge;
+  }
+
+
+  async submit() {
+    const loading = await this.loadingCtrl.create({
+      message: 'Loading',
+      spinner: 'lines-small'
+    });
+    await loading.present();
+
+    setTimeout(() => {
+      loading.dismiss();
+    }, 1000);
+    const combinedData = {
+      ...this.form.value,
+      ...this.form1.value,
+      ...this.form2.value
+    };
+
+    const door_delivery = (combinedData.door_delivery == 'Yes') ? true : false;
+
+    this.calculateShippingCharges(combinedData.weight, door_delivery)
+
+    return;
+    this.orderService.postItem(combinedData, 'order-create').subscribe((res: any) => {
+      console.log("🚀 ~ CreatePage ~ this.orderService.postItem ~ res:", res)
+      loading.dismiss();
+      this.router.navigate(['/orders']);
+    });
   }
 }

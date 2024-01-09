@@ -46,7 +46,7 @@
   },
   {
     "label": "Weight",
-    "model": "Weight",
+    "model": "weight",
     "value": "",
     "type": "text",
     "display": true,
@@ -63,6 +63,15 @@
       "items": ["Yes", "No"]
   },
   {
+      "label": "Door Delivery",
+      "model": "door_delivery",
+      "value": "",
+      "type": "radio",
+      "display": true,
+      "table_display": true,
+      "items": ["Yes", "No"]
+  },
+  {
       "label": "Delivery Status",
       "model": "delivery_status",
       "value": null,
@@ -70,6 +79,15 @@
       "display": true,
       "table_display": true,
       "items": ["New", "Processing", "Confirmed", "Dispatched", "Delivered", "Returned", "Cancelled"]
+  },
+  {
+      "label": "City",
+      "model": "city",
+      "value": null,
+      "type": "select",
+      "display": true,
+      "table_display": true,
+      "items": ["Nairobi", "Mombasa", "Kisumu"]
   },
   {
       "label": "Notes",
