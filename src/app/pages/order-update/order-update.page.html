@@ -1,0 +1,65 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/orders"></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      Order update
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <ion-card>
+    <ion-item>
+      <ion-icon name="chatbubbles" slot="start"></ion-icon>
+      <ion-label position="floating" name="notes">Notes</ion-label>
+      <ion-textarea [(ngModel)]="postData.notes" fill="outline"></ion-textarea>
+<!--
+
+      <ion-textarea label="Notes" labelPlacement="floating" fill="outline" placeholder="Enter text"
+      [(ngModel)]="postData.notes"></ion-textarea> -->
+    </ion-item>
+
+    <ion-card-content>
+      <ion-label name="notes">Signature</ion-label>
+
+      <div>
+        <canvas #canvas (touchstart)="startDrawing($event)" (touchmove)="moved($event)"></canvas>
+      </div>
+      <img src='{{ signatureImg }}' />
+
+      <ion-list *ngIf="postData.image">
+        <ion-item>
+          <ion-thumbnail slot="start">
+            <ion-img [src]="postData.image"></ion-img>
+          </ion-thumbnail>
+          <ion-label>Image</ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-content id="footer">
+    <ion-fab vertical="center" horizontal="start" slot="fixed" (click)="clearPad()">
+      <ion-fab-button color="danger">
+        <ion-icon name="caret-back-circle"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+
+    <ion-fab vertical="center" horizontal="center" slot="fixed">
+      <ion-fab-button (click)="checkPermission()">
+        <ion-icon name="camera"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+
+    <ion-fab vertical="center" horizontal="end" slot="fixed" (click)="deliveryPosition('Delivered')">
+      <ion-fab-button color="success">
+        <ion-icon name="checkbox"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+  </ion-content>
+  <ion-footer>
+
+  </ion-footer>

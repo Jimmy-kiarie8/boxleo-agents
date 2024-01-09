@@ -93,6 +93,9 @@ export class OrdersPage implements OnInit {
     this.router.navigate(['orders/create']);
   }
 
+  gotToUpdate() {
+    this.router.navigate(['order-update', 1]);
+  }
   async modal() {
     const modal = await this.modalCtrl.create({
       component: CreatePage,

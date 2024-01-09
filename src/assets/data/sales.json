@@ -18,24 +18,6 @@
       "items": []
   },
   {
-      "label": "Paid",
-      "model": "paid",
-      "value": "",
-      "type": "radio",
-      "display": true,
-      "table_display": true,
-      "items": ["Yes", "No"]
-  },
-  {
-      "label": "Delivery Status",
-      "model": "delivery_status",
-      "value": null,
-      "type": "select",
-      "display": true,
-      "table_display": true,
-      "items": ["New", "Processing", "Confirmed", "Dispatched", "Delivered", "Returned", "Cancelled"]
-  },
-  {
       "label": "Shipping Charges",
       "model": "shipping_charges",
       "value": "",
@@ -70,6 +52,24 @@
     "display": true,
     "table_display": true,
     "items": []
+  },
+  {
+      "label": "Paid",
+      "model": "paid",
+      "value": "",
+      "type": "radio",
+      "display": true,
+      "table_display": true,
+      "items": ["Yes", "No"]
+  },
+  {
+      "label": "Delivery Status",
+      "model": "delivery_status",
+      "value": null,
+      "type": "select",
+      "display": true,
+      "table_display": true,
+      "items": ["New", "Processing", "Confirmed", "Dispatched", "Delivered", "Returned", "Cancelled"]
   },
   {
       "label": "Notes",

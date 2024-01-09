@@ -2,3 +2,8 @@
   margin-bottom: 20px;
   margin-top: 20px;
 }
+
+
+.item.sc-ion-label-md-h:not(.item-input):not(.item-legacy), .item:not(.item-input):not(.item-legacy) .sc-ion-label-md-h{
+  flex-grow: 0 !important;
+}
