@@ -4,6 +4,29 @@
 }
 
 
-.item.sc-ion-label-md-h:not(.item-input):not(.item-legacy), .item:not(.item-input):not(.item-legacy) .sc-ion-label-md-h{
+.item.sc-ion-label-md-h:not(.item-input):not(.item-legacy),
+.item:not(.item-input):not(.item-legacy) .sc-ion-label-md-h {
   flex-grow: 0 !important;
+}
+
+#header-row {
+  // border-top: 1px solid #454545;
+  border-bottom: 1px solid #454545;
+
+  ion-col {
+    // border-right: 1px solid #636363;
+    // border-left: 1px solid #636363;
+    padding: 10px 5px;
+    font-weight: bolder;
+    font-size: medium;
+  }
+}
+
+
+#body-row {
+
+  ion-col {
+    // border: 1px solid #636363;
+    padding: 10px 5px;
+  }
 }

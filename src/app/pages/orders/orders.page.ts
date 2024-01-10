@@ -17,78 +17,133 @@ export class OrdersPage implements OnInit {
       client: { name: 'Client 1', phone: '453-169-5045' },
       delivery_date: new Date('2023-03-08'),
       order_no: 'ORD001',
-      total_price: '359.00'
+      total_price: '359.00',
+      status: 'Returned'
     },
     {
       id: 2,
       client: { name: 'Client 2', phone: '237-512-7603' },
       delivery_date: new Date('2023-07-21'),
       order_no: 'ORD002',
-      total_price: '154.00'
+      total_price: '154.00',
+      status: 'Delivered'
     },
     {
       id: 3,
       client: { name: 'Client 3', phone: '699-808-3263' },
       delivery_date: new Date('2023-01-20'),
       order_no: 'ORD003',
-      total_price: '63.00'
+      total_price: '63.00',
+      status: 'Delivered'
     },
     {
       id: 4,
       client: { name: 'Client 4', phone: '988-636-3627' },
       delivery_date: new Date('2023-08-30'),
       order_no: 'ORD004',
-      total_price: '260.00'
+      total_price: '260.00',
+      status: 'Delivered'
     },
     {
       id: 5,
       client: { name: 'Client 5', phone: '272-923-6188' },
       delivery_date: new Date('2023-12-08'),
       order_no: 'ORD005',
-      total_price: '312.00'
+      total_price: '312.00',
+      status: 'Cancelled'
     },
     {
       id: 6,
       client: { name: 'Client 6', phone: '499-865-5356' },
       delivery_date: new Date('2023-05-23'),
       order_no: 'ORD006',
-      total_price: '456.00'
+      total_price: '456.00',
+      status: 'Delivered'
     },
     {
       id: 7,
       client: { name: 'Client 7', phone: '480-456-5261' },
       delivery_date: new Date('2023-10-10'),
       order_no: 'ORD007',
-      total_price: '475.00'
+      total_price: '475.00',
+      status: 'Pending'
     },
     {
       id: 8,
       client: { name: 'Client 8', phone: '209-877-1681' },
       delivery_date: new Date('2023-01-12'),
       order_no: 'ORD008',
-      total_price: '496.00'
+      total_price: '496.00',
+      status: 'Cancelled'
     },
     {
       id: 9,
       client: { name: 'Client 9', phone: '496-710-6069' },
       delivery_date: new Date('2023-11-10'),
       order_no: 'ORD009',
-      total_price: '185.00'
+      total_price: '185.00',
+      status: 'Delivered'
     },
     {
       id: 10,
       client: { name: 'Client 10', phone: '763-418-6057' },
       delivery_date: new Date('2023-05-10'),
       order_no: 'ORD010',
-      total_price: '212.00'
+      total_price: '212.00',
+      status: 'Delivered'
     }
   ];
+
+  sortDirection = 0;
+  sortKey = null;
+  page = 0;
+  totalPages = 3;
+  resultCount = 10;
 
   constructor(private modalCtrl: ModalController, private router: Router) { }
 
   ngOnInit() {
+    this.getOrders()
   }
 
+  nextPage() {
+    this.page++
+  }
+  prevPage() {
+    this.page--
+  }
+  goFirst() {
+    this.page = 0
+  }
+  goLast() {
+    this.page = this.totalPages - 1
+  }
+
+  sortBy(key: any) {
+    this.sortKey = key;
+    this.sortDirection++;
+    this.sort()
+  }
+  sort() {
+    if (this.sortDirection == 1) {
+      // this.orders = this.orders.sort((a,b) => {
+      //   const valA = a[this.sortKey];
+      //   const valB = b[this.sortKey];
+      //   return valA.locacaleCompare(valB);
+      // });
+
+    } else if (this.sortDirection == 2) {
+
+    } else if (this.sortDirection == 3) {
+
+    } else if (this.sortDirection == 4) {
+
+    } else {
+      this.sortDirection = 0;
+      this.sortKey = null;
+    }
+
+  }
   gotToCreate() {
     this.router.navigate(['orders/create']);
   }
@@ -106,6 +161,7 @@ export class OrdersPage implements OnInit {
     modal.present();
   }
 
+  getOrders() {}
 
   async show(order: any) {
     const modal = await this.modalCtrl.create({
