@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { ModalController, Platform } from '@ionic/angular';
 import { CreatePage } from './create/create.page';
 import { ShowPage } from './show/show.page';
 import { Router } from '@angular/router';
@@ -99,8 +99,11 @@ export class OrdersPage implements OnInit {
   page = 0;
   totalPages = 3;
   resultCount = 10;
+  isMobile: boolean;
 
-  constructor(private modalCtrl: ModalController, private router: Router) { }
+  constructor(private modalCtrl: ModalController, private router: Router, private platform: Platform) {
+    this.isMobile = this.platform.is('mobile');
+  }
 
   ngOnInit() {
     this.getOrders()
@@ -161,7 +164,9 @@ export class OrdersPage implements OnInit {
     modal.present();
   }
 
-  getOrders() {}
+  getOrders(page?: number) {
+
+  }
 
   async show(order: any) {
     const modal = await this.modalCtrl.create({

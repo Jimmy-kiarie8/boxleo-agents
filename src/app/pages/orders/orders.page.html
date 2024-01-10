@@ -19,12 +19,12 @@
   <ion-input label="Search" labelPlacement="stacked" [clearInput]="true" placeholder="" fill="outline"
     labelPlacement="floating">
   </ion-input>
-  <!-- <ion-list>
+  <ion-list *ngIf="isMobile">
     <ion-item-group>
       <ion-item-divider button *ngFor="let item of orders">
-        <ion-avatar slot="start">
+        <!-- <ion-avatar slot="start">
           <ion-icon name="cart"></ion-icon>
-        </ion-avatar>
+        </ion-avatar> -->
         <ion-label slot="start" (click)="show(item)">
           <ion-grid>
             <ion-row>
@@ -52,82 +52,84 @@
         </ion-label>
       </ion-item-divider>
     </ion-item-group>
-  </ion-list> -->
+  </ion-list>
 
-  <ion-card>
+  <!-- Web View -->
+  <ion-card *ngIf="!isMobile">
     <ion-card-content>
 
-  <ion-grid>
-    <ion-row id="header-row">
-      <ion-col size="2">Order No</ion-col>
-      <ion-col size="2">Name</ion-col>
-      <ion-col size="2">Phone</ion-col>
-      <ion-col size="2">Status</ion-col>
-      <ion-col size="2">Amount</ion-col>
-      <ion-col>Action</ion-col>
-    </ion-row>
-    <hr>
-    <ion-row id="body-row" *ngFor="let item of orders;let i=index">
-      <ion-col size="2">{{ item.order_no }}</ion-col>
-      <ion-col size="2">{{ item.client.name }}</ion-col>
-      <ion-col size="2">{{ item.client.phone }}</ion-col>
-      <ion-col size="2">{{ item.status }}</ion-col>
-      <ion-col size="2">{{ item.total_price }}</ion-col>
-      <ion-col size="2">
-        <ion-button fill="clear">
-          <ion-icon slot="icon-only" name="trash" color="danger"></ion-icon>
-        </ion-button>
-        <ion-button fill="clear">
-          <ion-icon slot="icon-only" name="pencil" color="primary"></ion-icon>
-        </ion-button>
-      </ion-col>
-    </ion-row>
+      <ion-grid>
+        <ion-row id="header-row">
+          <ion-col size="2">Order No</ion-col>
+          <ion-col size="2">Name</ion-col>
+          <ion-col size="2">Phone</ion-col>
+          <ion-col size="2">Status</ion-col>
+          <ion-col size="2">Amount</ion-col>
+          <ion-col>Action</ion-col>
+        </ion-row>
+        <hr>
+        <ion-row id="body-row" *ngFor="let item of orders;let i=index">
+          <ion-col size="2">
+            <ion-button fill="clear" (click)="show(item)">{{ item.order_no }}</ion-button>
+            </ion-col>
+          <ion-col size="2">{{ item.client.name }}</ion-col>
+          <ion-col size="2">{{ item.client.phone }}</ion-col>
+          <ion-col size="2">{{ item.status }}</ion-col>
+          <ion-col size="2">{{ item.total_price }}</ion-col>
+          <ion-col size="2">
+            <ion-button fill="clear">
+              <ion-icon slot="icon-only" name="trash" color="danger"></ion-icon>
+            </ion-button>
+            <ion-button fill="clear">
+              <ion-icon slot="icon-only" name="pencil" color="primary"></ion-icon>
+            </ion-button>
+          </ion-col>
+        </ion-row>
 
+        <ion-row id="footer-row">
+          <ion-col size="8">
+          </ion-col>
+          <ion-col size="4">
+            <ion-row>
+              <ion-col size="2">
+                <ion-button (click)="goFirst()" fill="clear">
+                  <ion-icon slot="icon-only" name="play-back"></ion-icon>
+                </ion-button>
+              </ion-col>
+              <ion-col size="2">
+                <ion-button (click)="prevPage()" fill="clear">
+                  <ion-icon slot="icon-only" name="chevron-back"></ion-icon>
+                </ion-button>
+              </ion-col>
 
-    <ion-row id="footer-row">
-      <ion-col size="2">
-        <ion-button (click)="goFirst()" fill="clear">
-          <ion-icon slot="icon-only" name="play-back"></ion-icon>
-        </ion-button>
-      </ion-col>
-      <ion-col size="2">
-        <ion-button (click)="prevPage()" fill="clear">
-          <ion-icon slot="icon-only" name="chevron-back"></ion-icon>
-        </ion-button>
-      </ion-col>
+              <ion-col size="2">
+                <ion-select interface="popover" (ionChange)="getOrders()" [(ngModel)]="resultCount">
+                  <ion-select-option [value]="5">5</ion-select-option>
+                  <ion-select-option [value]="10">10</ion-select-option>
+                  <ion-select-option [value]="25">25</ion-select-option>
+                  <ion-select-option [value]="50">50</ion-select-option>
+                </ion-select>
+              </ion-col>
 
+              <ion-col size="2">
+                <ion-button (click)="nextPage()" fill="clear">
+                  <ion-icon slot="icon-only" name="chevron-forward"></ion-icon>
+                </ion-button>
+              </ion-col>
+              <ion-col size="2">
+                <ion-button (click)="goLast()" fill="clear">
+                  <ion-icon slot="icon-only" name="play-forward"></ion-icon>
+                </ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-col>
+        </ion-row>
+        <hr>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
 
-
-      <ion-col size="4">
-        <ion-select placeholder="Page" (ionChange)="getOrders" [(ngModel)]="resultCount">
-          <ion-select-option value="5">5</ion-select-option>
-          <ion-select-option value="10">10</ion-select-option>
-          <ion-select-option value="bananas">Bananas</ion-select-option>
-        </ion-select>
-      </ion-col>
-
-
-
-
-      <ion-col size="2">
-        <ion-button (click)="goLast()" fill="clear">
-          <ion-icon slot="icon-only" name="play-foward"></ion-icon>
-        </ion-button>
-      </ion-col>
-      <ion-col size="2">
-        <ion-button (click)="nextPage()" fill="clear">
-          <ion-icon slot="icon-only" name="chevron-foward"></ion-icon>
-        </ion-button>
-      </ion-col>
-    </ion-row>
-    <hr>
-  </ion-grid>
-</ion-card-content>
-</ion-card>
-
-
-
-
+  <!-- Web View -->
 
   <!--
   <ion-infinite-scroll (ionInfinite)="loadMore($event)">
