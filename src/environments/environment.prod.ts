@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  centralUrl: '',
+  centralUrl: 'http://boxleo-old.test',
   httpType: 'https://'
 };

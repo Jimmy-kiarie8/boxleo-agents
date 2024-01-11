@@ -9,24 +9,35 @@
   flex-grow: 0 !important;
 }
 
-#header-row {
-  // border-top: 1px solid #454545;
-  border-bottom: 1px solid #454545;
 
-  ion-col {
-    // border-right: 1px solid #636363;
-    // border-left: 1px solid #636363;
-    padding: 10px 5px;
-    font-weight: bolder;
-    font-size: medium;
+ion-grid {
+  border: 1px solid #3333338a;
+  border-radius: 10px;
+  #header-row {
+    // border-top: 1px solid #454545;
+    border-bottom: 1px solid #3333338a;
+
+    ion-col {
+      // border-right: 1px solid #636363;
+      // border-left: 1px solid #636363;
+      padding: 10px 5px;
+      font-weight: bolder;
+      font-size: medium;
+    }
   }
-}
 
 
-#body-row {
+  #body-row {
+    border-bottom: 1px solid #3333338a !important;
 
-  ion-col {
-    // border: 1px solid #636363;
-    padding: 10px 5px;
+    ion-col {
+      // border: 1px solid #636363;
+      padding: 10px 5px;
+    }
+  }
+
+  #body-row:hover {
+    background-color: #3333332e;
+    cursor: pointer;
   }
 }

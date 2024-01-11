@@ -226,9 +226,10 @@ export class CreatePage implements OnInit {
 
     const door_delivery = (combinedData.door_delivery == 'Yes') ? true : false;
 
-    this.calculateShippingCharges(combinedData.weight, door_delivery)
+    combinedData.shipping_address = this.calculateShippingCharges(combinedData.weight, door_delivery)
+    combinedData.paid = (combinedData.paid == 'Yes') ? true : false
+    combinedData.door_delivery = (combinedData.door_delivery == 'Yes') ? true : false
 
-    return;
     this.orderService.postItem(combinedData, 'order-create').subscribe((res: any) => {
       console.log("🚀 ~ CreatePage ~ this.orderService.postItem ~ res:", res)
       loading.dismiss();

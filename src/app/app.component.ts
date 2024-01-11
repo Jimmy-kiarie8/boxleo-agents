@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Platform } from '@ionic/angular';
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -9,5 +10,8 @@ export class AppComponent {
     { title: 'Orders', url: '/orders', icon: 'cart' }
   ];
   public labels = ['Settings', 'About', 'Share'];
-  constructor() {}
+  isMobile: boolean;
+  constructor(private platform: Platform) {
+    this.isMobile = this.platform.is('mobile');
+  }
 }

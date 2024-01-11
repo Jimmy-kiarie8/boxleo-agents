@@ -11,7 +11,7 @@
   {
       "label": "Amount",
       "model": "amount",
-      "value": "",
+      "value": 0,
       "type": "text",
       "display": true,
       "table_display": true,

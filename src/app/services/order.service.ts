@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class OrderService {
 
-  centralUrl = environment.centralUrl + '/api/mobile';
+  centralUrl = environment.centralUrl + '/api/agent/';
   domain = environment.httpType;
   httpOptions = {
     headers: new HttpHeaders({
@@ -19,16 +19,19 @@ export class OrderService {
   };
   constructor(private http: HttpClient) { }
 
-  getItem(): Observable<any> {
-    return this.http.get<any>(`${this.domain}/orders`, this.httpOptions);
+  getItem(model: any): Observable<any> {
+    let url = this.centralUrl + model
+    return this.http.get<any>(`${url}`, this.httpOptions);
   }
 
   postItem(data: any, model: String): Observable<any> {
-    return this.http.post(`${this.domain}/${model}`, data, this.httpOptions);
+    let url = this.centralUrl + model
+    return this.http.post(`${url}`, data, this.httpOptions);
   }
 
   patchItem(data: any,model: String, id: any): Observable<any> {
-    return this.http.patch(`{this.domain}/${model}/${id}`, data, this.httpOptions);
+    let url = this.centralUrl + model
+    return this.http.patch(`${url}/${id}`, data, this.httpOptions);
   }
 
 }

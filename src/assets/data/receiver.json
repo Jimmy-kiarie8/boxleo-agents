@@ -1,7 +1,7 @@
 [
   {
       "label": "Receiver Name",
-      "model": "receiver_name",
+      "model": "client_name",
       "value": "",
       "type": "text",
       "display": true,
@@ -11,7 +11,7 @@
   },
   {
       "label": "Receiver Phone",
-      "model": "receiver_phone",
+      "model": "client_phone",
       "value": "",
       "type": "text",
       "display": true,
@@ -21,7 +21,7 @@
   },
   {
       "label": "Receiver Address",
-      "model": "receiver_address",
+      "model": "client_address",
       "value": "",
       "type": "text",
       "display": true,
@@ -31,7 +31,7 @@
   },
   {
       "label": "Receiver Id",
-      "model": "receiver_id",
+      "model": "client_id",
       "value": "",
       "type": "text",
       "display": true,

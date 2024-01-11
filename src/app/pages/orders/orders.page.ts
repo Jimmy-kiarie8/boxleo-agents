@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { ModalController, Platform } from '@ionic/angular';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { IonModal, ModalController, Platform } from '@ionic/angular';
 import { CreatePage } from './create/create.page';
 import { ShowPage } from './show/show.page';
 import { Router } from '@angular/router';
+import { OrderService } from 'src/app/services/order.service';
 
 @Component({
   selector: 'app-orders',
@@ -10,116 +11,60 @@ import { Router } from '@angular/router';
   styleUrls: ['./orders.page.scss'],
 })
 export class OrdersPage implements OnInit {
+  // @ViewChild(IonModal) modal: IonModal;
 
-  orders = [
-    {
-      id: 1,
-      client: { name: 'Client 1', phone: '453-169-5045' },
-      delivery_date: new Date('2023-03-08'),
-      order_no: 'ORD001',
-      total_price: '359.00',
-      status: 'Returned'
-    },
-    {
-      id: 2,
-      client: { name: 'Client 2', phone: '237-512-7603' },
-      delivery_date: new Date('2023-07-21'),
-      order_no: 'ORD002',
-      total_price: '154.00',
-      status: 'Delivered'
-    },
-    {
-      id: 3,
-      client: { name: 'Client 3', phone: '699-808-3263' },
-      delivery_date: new Date('2023-01-20'),
-      order_no: 'ORD003',
-      total_price: '63.00',
-      status: 'Delivered'
-    },
-    {
-      id: 4,
-      client: { name: 'Client 4', phone: '988-636-3627' },
-      delivery_date: new Date('2023-08-30'),
-      order_no: 'ORD004',
-      total_price: '260.00',
-      status: 'Delivered'
-    },
-    {
-      id: 5,
-      client: { name: 'Client 5', phone: '272-923-6188' },
-      delivery_date: new Date('2023-12-08'),
-      order_no: 'ORD005',
-      total_price: '312.00',
-      status: 'Cancelled'
-    },
-    {
-      id: 6,
-      client: { name: 'Client 6', phone: '499-865-5356' },
-      delivery_date: new Date('2023-05-23'),
-      order_no: 'ORD006',
-      total_price: '456.00',
-      status: 'Delivered'
-    },
-    {
-      id: 7,
-      client: { name: 'Client 7', phone: '480-456-5261' },
-      delivery_date: new Date('2023-10-10'),
-      order_no: 'ORD007',
-      total_price: '475.00',
-      status: 'Pending'
-    },
-    {
-      id: 8,
-      client: { name: 'Client 8', phone: '209-877-1681' },
-      delivery_date: new Date('2023-01-12'),
-      order_no: 'ORD008',
-      total_price: '496.00',
-      status: 'Cancelled'
-    },
-    {
-      id: 9,
-      client: { name: 'Client 9', phone: '496-710-6069' },
-      delivery_date: new Date('2023-11-10'),
-      order_no: 'ORD009',
-      total_price: '185.00',
-      status: 'Delivered'
-    },
-    {
-      id: 10,
-      client: { name: 'Client 10', phone: '763-418-6057' },
-      delivery_date: new Date('2023-05-10'),
-      order_no: 'ORD010',
-      total_price: '212.00',
-      status: 'Delivered'
-    }
-  ];
+
+
+  formData = {
+    comment: ''
+  }
+
+  orders: any;
 
   sortDirection = 0;
   sortKey = null;
-  page = 0;
+  page = 1;
   totalPages = 3;
   resultCount = 10;
   isMobile: boolean;
+  totalResults = 0;
+  last_page = 0;
+  per_page = 0;
+  from = 0;
+  to = 0;
 
-  constructor(private modalCtrl: ModalController, private router: Router, private platform: Platform) {
+  constructor(private modalCtrl: ModalController, private router: Router, private platform: Platform, private orderService: OrderService) {
     this.isMobile = this.platform.is('mobile');
   }
 
+
+  presentingElement: any;
+
   ngOnInit() {
+    this.presentingElement = document.querySelector('.ion-page');
     this.getOrders()
   }
 
   nextPage() {
-    this.page++
+    if (this.page < this.last_page) {
+      this.page++
+      this.getOrders()
+    }
   }
   prevPage() {
-    this.page--
+    if (this.page > 1) {
+      this.page--
+      this.getOrders()
+    }
   }
   goFirst() {
-    this.page = 0
+    this.page = 1
+    this.getOrders()
   }
   goLast() {
-    this.page = this.totalPages - 1
+    this.page = this.last_page;
+
+    this.getOrders()
   }
 
   sortBy(key: any) {
@@ -164,17 +109,31 @@ export class OrdersPage implements OnInit {
     modal.present();
   }
 
-  getOrders(page?: number) {
-
+  getOrders() {
+    console.log("🚀 ~ OrdersPage ~ getOrders ~ this.resultCount:", this.resultCount)
+    let page_ = this.page;
+    const url = "orders?page=" + page_ + "&limit=" + this.resultCount;
+    this.orderService.getItem(url).subscribe((res) => {
+      console.log("🚀 ~ OrdersPage ~ this.orderService.getItem ~ res:", res)
+      this.orders = res.data;
+      this.totalPages = res.meta.last_page
+      this.totalResults = res.meta.total
+      this.page = res.meta.current_page
+      this.per_page = res.meta.per_page
+      this.last_page = res.meta.last_page
+      this.from = res.meta.from
+      this.to = res.meta.to
+    })
   }
 
-  async show(order: any) {
+  async show(order: any, type: any) {
     const modal = await this.modalCtrl.create({
       component: ShowPage,
-      componentProps: { order },
+      componentProps: { order, type },
       breakpoints: [0, 0.9],
       initialBreakpoint: 0.7
     });
     modal.present();
   }
+
 }
