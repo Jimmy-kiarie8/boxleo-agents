@@ -25,12 +25,14 @@ export class OrderService {
   }
 
   postItem(data: any, model: String): Observable<any> {
-    let url = this.centralUrl + model
+    // let url = this.centralUrl + model
+    let url = '';
     return this.http.post(`${url}`, data, this.httpOptions);
   }
 
   patchItem(data: any,model: String, id: any): Observable<any> {
-    let url = this.centralUrl + model
+    // let url = this.centralUrl + model
+    let url = '';
     return this.http.patch(`${url}/${id}`, data, this.httpOptions);
   }
 

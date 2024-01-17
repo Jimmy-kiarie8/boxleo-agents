@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  centralUrl: 'http://boxleo-old.test',
+  centralUrl: 'https://app.boxleocourier.com',
   httpType: 'https://'
 };
 
